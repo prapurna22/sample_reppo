@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Anomaly Detection Results</title>
+    <style>
+        .anomaly {
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>Anomaly Detection Results</h1>
+    <table>
+        <tr>
+            {% for column in results.data[0] %}
+                <th>{{ column }}</th>
+            {% endfor %}
+        </tr>
+        {% set rows = results.data %}
+        {% set labels = results.labels %}
+        {% for i in range(rows|length) %}
+            <tr {% if labels[i] == 1 %}class="anomaly"{% endif %}>
+                {% for j in range(rows[i]|length) %}
+                    <td>{{ rows[i][j] }}</td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
